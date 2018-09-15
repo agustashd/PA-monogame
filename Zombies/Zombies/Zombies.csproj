@@ -44,7 +44,10 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sprites\Alive.cs" />
+    <Compile Include="Sprites\Background.cs" />
     <Compile Include="Sprites\FabricBase.cs" />
+    <Compile Include="Sprites\Mortable.cs" />
     <Compile Include="Sprites\Sprite.cs" />
     <Compile Include="Sprites\Updateable.cs" />
     <Compile Include="Sprites\Xena.cs" />

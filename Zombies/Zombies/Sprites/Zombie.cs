@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Zombies.Sprites
 {
-    public class Zombie : Sprite
+    public class Zombie : Alive
     {
         public Zombie()
         {
@@ -19,10 +19,12 @@ namespace Zombies.Sprites
                 random.Next(Game1.TheGame.GraphicsDevice.Viewport.Height - 100), 
                 100, 100);
             Color = Color.White;
+            Health = random.Next(50, 100);
         }
 
         // Para completar el codigo que le falta al metodo Update de la clase abstracta Sprite
         // tenemos que volver a escribir el metodo y completar con lo que queremos que haga
+        TimeSpan lastTime;
         public override void Update(GameTime gametime)
         {
             int x;
@@ -34,6 +36,24 @@ namespace Zombies.Sprites
             if (Rectangle.X < -100)
             {
                 Game1.TheGame.actualizaciones.Add(this);
+            }
+
+            if (gametime.TotalGameTime.Subtract(lastTime).Milliseconds > 500)
+            {
+                Xena xena = null;
+                foreach (var item in Game1.TheGame.sprites)
+                {
+                    if (item is Xena)
+                    {
+                        xena = item as Xena;
+                        break;
+                    }
+                }
+
+                if (Rectangle.Intersects(xena.Rectangle))
+                {
+                    xena.Health -= 1;
+                }
             }
         }
     }

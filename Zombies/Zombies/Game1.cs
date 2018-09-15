@@ -55,6 +55,7 @@ namespace Zombies
 
             actualizaciones = new List<Sprite>();
             sprites = new List<Updateable>();
+            sprites.Add(new Background());
             sprites.Add(new Xena());
             sprites.Add(new ZombieFactory());
         }

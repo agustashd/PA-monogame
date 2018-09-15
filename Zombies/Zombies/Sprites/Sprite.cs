@@ -23,7 +23,7 @@ namespace Zombies.Sprites
                 random = new Random();
         }
 
-        public void Draw(GameTime gametime)
+        public virtual void Draw(GameTime gametime)
         {
             Game1.TheGame.spriteBatch.Draw(Image, Rectangle, Color);
         }

@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace Zombies.Sprites
 {
-    public class Xena : Sprite
+    public class Xena : Alive
     {
         public Xena()
         {
             Image = Game1.TheGame.Content.Load<Texture2D>("Images/nave");
             Rectangle = new Rectangle(50, 50, 80, 80);
             Color = Color.White;
+            Health = 100;
         }
 
         // Para completar el codigo que le falta al metodo Update de la clase abstracta Sprite
