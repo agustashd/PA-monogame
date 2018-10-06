@@ -18,7 +18,6 @@ namespace Zombies.Sprites
                 Game1.TheGame.GraphicsDevice.Viewport.Width,
                 random.Next(Game1.TheGame.GraphicsDevice.Viewport.Height - 100), 
                 100, 100);
-            Color = Color.White;
             Health = random.Next(50, 100);
         }
 
@@ -54,6 +53,11 @@ namespace Zombies.Sprites
                 {
                     xena.Health -= 1;
                 }
+            }
+
+            if (this.Health <= 0)
+            {
+                Game1.TheGame.actualizaciones.Add(this);
             }
         }
     }

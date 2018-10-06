@@ -15,10 +15,11 @@ namespace Zombies.Sprites
         {
             Image = Game1.TheGame.Content.Load<Texture2D>("Images/nave");
             Rectangle = new Rectangle(50, 50, 80, 80);
-            Color = Color.White;
             Health = 100;
         }
 
+        TimeSpan lastTime, powerTime;
+        bool power;
         // Para completar el codigo que le falta al metodo Update de la clase abstracta Sprite
         // tenemos que volver a escribir el metodo y completar con lo que queremos que haga
         public override void Update(GameTime gametime)
@@ -46,6 +47,26 @@ namespace Zombies.Sprites
                 y = 0;
 
             Rectangle = new Rectangle(x, y, Rectangle.Width, Rectangle.Height);
+
+            if (Keyboard.GetState().IsKeyDown(Keys.C))
+            {
+                power = true;
+                powerTime = gametime.TotalGameTime;
+            }
+
+            if (Keyboard.GetState().IsKeyUp(Keys.C) && power)
+            {
+                Espada espada = new Espada(this, 10 * gametime.TotalGameTime.Subtract(powerTime).Seconds);
+                Game1.TheGame.actualizaciones.Add(espada);
+                power = false;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && gametime.TotalGameTime.Subtract(lastTime).Milliseconds > 200)
+            {
+                lastTime = gametime.TotalGameTime;
+                Espada espada = new Espada(this);
+                Game1.TheGame.actualizaciones.Add(espada);
+            }
         }
     }
 }

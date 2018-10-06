@@ -21,6 +21,7 @@ namespace Zombies.Sprites
         {
             if (random == null)
                 random = new Random();
+            Color = Color.White;
         }
 
         public virtual void Draw(GameTime gametime)
