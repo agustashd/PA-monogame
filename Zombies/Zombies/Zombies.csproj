@@ -50,6 +50,7 @@
     <Compile Include="Sprites\Espada.cs" />
     <Compile Include="Sprites\FabricBase.cs" />
     <Compile Include="Sprites\Mortable.cs" />
+    <Compile Include="Sprites\RectangleAnimate.cs" />
     <Compile Include="Sprites\Sprite.cs" />
     <Compile Include="Sprites\Updateable.cs" />
     <Compile Include="Sprites\Xena.cs" />

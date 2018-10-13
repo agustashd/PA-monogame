@@ -9,21 +9,39 @@ using System.Threading.Tasks;
 
 namespace Zombies.Sprites
 {
-    public class Xena : Alive
+    public class Xena : RectangleAnimate
     {
+        public int Score { get; internal set; }
+
         public Xena()
         {
-            Image = Game1.TheGame.Content.Load<Texture2D>("Images/nave");
+            Image = Game1.TheGame.Content.Load<Texture2D>("Images/RUNRUN");
             Rectangle = new Rectangle(50, 50, 80, 80);
             Health = 100;
+            var w = Image.Width / 8;
+            for (int i = 0; i < 8; i++)
+            {
+                rectangulos.Add(new Rectangle(w * i, 0, w, Image.Height));
+            }
         }
 
-        TimeSpan lastTime, powerTime;
+        TimeSpan lastTime, powerTime, frameTime;
         bool power;
+        int daño;
+        Rectangle rectBack;
+
+
         // Para completar el codigo que le falta al metodo Update de la clase abstracta Sprite
         // tenemos que volver a escribir el metodo y completar con lo que queremos que haga
         public override void Update(GameTime gametime)
         {
+            if (gametime.TotalGameTime.Subtract(frameTime).Milliseconds > 200)
+            {
+                frameTime = gametime.TotalGameTime;
+                selectedRectangle++;
+                if (selectedRectangle > 7) selectedRectangle = 0;
+            }
+
             int x, y;
             x = Rectangle.X;
             y = Rectangle.Y;
@@ -48,17 +66,30 @@ namespace Zombies.Sprites
 
             Rectangle = new Rectangle(x, y, Rectangle.Width, Rectangle.Height);
 
-            if (Keyboard.GetState().IsKeyDown(Keys.C))
+            if (Keyboard.GetState().IsKeyDown(Keys.C) && !power)
             {
                 power = true;
                 powerTime = gametime.TotalGameTime;
+                rectBack = Rectangle;
+            }
+
+            if (power)
+            {
+                this.daño = gametime.TotalGameTime.Subtract(powerTime).Seconds;
+                Rectangle = new Rectangle(
+                    Rectangle.X,
+                    Rectangle.Y,
+                    (int)(rectBack.Width * (1 + (float)daño / 4)),
+                    (int)(rectBack.Height * (1 + (float)daño / 4))
+                    );
             }
 
             if (Keyboard.GetState().IsKeyUp(Keys.C) && power)
             {
-                Espada espada = new Espada(this, 10 * gametime.TotalGameTime.Subtract(powerTime).Seconds);
+                Espada espada = new Espada(this, 20 * this.daño);
                 Game1.TheGame.actualizaciones.Add(espada);
                 power = false;
+                Rectangle = rectBack;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && gametime.TotalGameTime.Subtract(lastTime).Milliseconds > 200)

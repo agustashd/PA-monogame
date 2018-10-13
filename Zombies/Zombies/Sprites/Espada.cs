@@ -41,6 +41,7 @@ namespace Zombies.Sprites
                     if (zmb.Rectangle.Intersects(Rectangle))
                     {
                         zmb.Health -= energy;
+                        xena.Score += 10;
                         Game1.TheGame.actualizaciones.Add(this);
                         break;
                     }
