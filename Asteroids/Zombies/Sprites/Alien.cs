@@ -7,18 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zombies.Sprites
+namespace Asteroids.Sprites
 {
-    public class Zombie : Alive
+    public class Alien : Alive
     {
-        public Zombie()
+        public Alien()
         {
-            Image = Game1.TheGame.Content.Load<Texture2D>("Images/male");
+            Image = Game1.TheGame.Content.Load<Texture2D>("Images/alien");
             Rectangle = new Rectangle(
-                Game1.TheGame.GraphicsDevice.Viewport.Height,
-                random.Next(Game1.TheGame.GraphicsDevice.Viewport.Height - 100), 
-                100, 100);
-            Health = random.Next(50, 100);
+                random.Next(Game1.TheGame.GraphicsDevice.Viewport.Width - 50),
+                -50, 
+                50, 50);
+            Health = random.Next(30, 70);
         }
 
         // Para completar el codigo que le falta al metodo Update de la clase abstracta Sprite
@@ -26,32 +26,33 @@ namespace Zombies.Sprites
         TimeSpan lastTime;
         public override void Update(GameTime gametime)
         {
-            int x;
-            x = Rectangle.X;
-            x -= 2;
+            int y;
+            y = Rectangle.Y;
+            y += 1;
 
-            Rectangle = new Rectangle(x, Rectangle.Y, Rectangle.Width, Rectangle.Height);
+            Rectangle = new Rectangle(Rectangle.X, y, Rectangle.Width, Rectangle.Height);
 
-            if (Rectangle.X < -100)
+            if (Rectangle.Y > 600)
             {
                 Game1.TheGame.actualizaciones.Add(this);
             }
 
-            if (gametime.TotalGameTime.Subtract(lastTime).Milliseconds > 500)
+            if (gametime.TotalGameTime.Subtract(lastTime).Milliseconds > 100)
             {
-                Xena xena = null;
-                foreach (var item in Game1.TheGame.sprites)
+                // Busco el ship entre los sprites que hay
+                Ship ship = null;
+                foreach (var sprite in Game1.TheGame.sprites)
                 {
-                    if (item is Xena)
+                    if (sprite is Ship)
                     {
-                        xena = item as Xena;
+                        ship = sprite as Ship;
                         break;
                     }
                 }
 
-                if (Rectangle.Intersects(xena.Rectangle))
+                if (Rectangle.Intersects(ship.Rectangle))
                 {
-                    xena.Health -= 1;
+                    ship.Health -= 1;
                 }
             }
 
