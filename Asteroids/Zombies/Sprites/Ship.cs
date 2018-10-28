@@ -11,7 +11,7 @@ namespace Asteroids.Sprites
 {
     public class Ship : RectangleAnimate
     {
-        public int Score { get; internal set; }
+        public int Score { get; internal set; } = 0;
 
         public Ship()
         {
@@ -31,6 +31,18 @@ namespace Asteroids.Sprites
                                                  "HP                 SCORE " + Score.ToString(),
                                                  new Vector2(2, 0),
                                                  Color.Thistle);
+            if (Health <= 0)
+            {
+                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Font.GameOver],
+                                                     "GAME OVER",
+                                                     new Vector2(20, 250),
+                                                     Color.AntiqueWhite);
+                Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Font.Restart],
+                                                     "Press ENTER to restart",
+                                                     new Vector2(40, 300),
+                                                     Color.Yellow);
+                Game1.TheGame.IsGameOver = true;
+            }
             base.Draw(gametime);
         }
 
@@ -68,11 +80,6 @@ namespace Asteroids.Sprites
                 lastTime = gametime.TotalGameTime;
                 Laser laser = new Laser(this);
                 Game1.TheGame.actualizaciones.Add(laser);
-            }
-
-            if (Health <= 0)
-            {
-                //Game1.TheGame.actualizaciones.Add(new Explosion(Rectangle));
             }
         }
     }

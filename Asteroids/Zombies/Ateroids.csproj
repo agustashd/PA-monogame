@@ -78,7 +78,9 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\Fonts\GameOver.spritefont" />
     <None Include="Content\Fonts\HUD.spritefont" />
+    <None Include="Content\Fonts\Restart.spritefont" />
     <None Include="Content\Sounds\ObservingTheStar.ogg" />
   </ItemGroup>
   <ItemGroup />

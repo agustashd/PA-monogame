@@ -20,7 +20,7 @@ namespace Asteroids
 
         public enum Font
         {
-            HUD 
+            HUD, GameOver, Restart
         }
 
         Song backgroundSong;
@@ -32,6 +32,7 @@ namespace Asteroids
         internal List<Sprite> actualizaciones { get; private set; }
         public Dictionary<Soundfx, SoundEffect> Sounds { get; private set; }
         public Dictionary<Font, SpriteFont> Fonts { get; private set; }
+        public bool IsGameOver { get; internal set; } = false;
 
         public Game1()
         {
@@ -78,6 +79,8 @@ namespace Asteroids
             Sounds.Add(Soundfx.Laser, Content.Load<SoundEffect>("Sounds/laser9"));
 
             Fonts.Add(Font.HUD, Content.Load<SpriteFont>("Fonts/HUD"));
+            Fonts.Add(Font.GameOver, Content.Load<SpriteFont>("Fonts/GameOver"));
+            Fonts.Add(Font.Restart, Content.Load<SpriteFont>("Fonts/Restart"));
 
             sprites.Add(new AlienFactory());
             sprites.Add(new Background());
@@ -113,27 +116,37 @@ namespace Asteroids
             // TODO: Add your update logic here
             //xena.Update(gameTime);
             //asteroids.Update(gameTime);
-
-            foreach (var sprite in sprites)
+            if (!IsGameOver)
             {
-                sprite.Update(gameTime);
-            }
+                foreach (var sprite in sprites)
+                {
+                    sprite.Update(gameTime);
+                }
 
-            foreach (var sprite in actualizaciones)
+                foreach (var sprite in actualizaciones)
+                {
+                    if (sprites.Contains(sprite))
+                    {
+                        sprites.Remove(sprite);
+                    }
+                    else
+                    {
+                        sprites.Add(sprite);
+                    }
+                }
+
+                actualizaciones.Clear();
+
+                base.Update(gameTime);
+            }
+            else if (IsGameOver)
             {
-                if (sprites.Contains(sprite))
+                if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
-                    sprites.Remove(sprite);
-                }
-                else
-                {
-                    sprites.Add(sprite);
+                    IsGameOver = false;
+                    LoadContent();
                 }
             }
-
-            actualizaciones.Clear();
-
-            base.Update(gameTime);
         }
 
         /// <summary>

@@ -13,12 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Fonts/HUD.spritefont
+#begin Fonts/GameOver.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/HUD.spritefont
+/build:Fonts/GameOver.spritefont
 
 #begin Fonts/HUD.spritefont
 /importer:FontDescriptionImporter
@@ -26,6 +26,13 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/HUD.spritefont
+
+#begin Fonts/Restart.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Restart.spritefont
 
 #begin Images/alien.png
 /importer:TextureImporter
