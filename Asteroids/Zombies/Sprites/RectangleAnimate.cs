@@ -45,7 +45,7 @@ namespace Asteroids.Sprites
                 }
 
                 vida.SetData(data);
-                Game1.TheGame.spriteBatch.Draw(vida, new Vector2(0, 0), Color.GreenYellow);
+                Game1.TheGame.spriteBatch.Draw(vida, new Vector2(28, 0), Color.GreenYellow);
             }
         }
     }

@@ -14,10 +14,7 @@ namespace Asteroids.Sprites
         public Alien()
         {
             Image = Game1.TheGame.Content.Load<Texture2D>("Images/alien");
-            Rectangle = new Rectangle(
-                random.Next(Game1.TheGame.GraphicsDevice.Viewport.Width - 50),
-                -50, 
-                50, 50);
+            Rectangle = new Rectangle(random.Next(Game1.TheGame.GraphicsDevice.Viewport.Width - 50), 10, 50, 50);
             Health = random.Next(30, 70);
         }
 
@@ -54,11 +51,18 @@ namespace Asteroids.Sprites
                 {
                     ship.Health -= 1;
                 }
+
+                if (Health <= 0)
+                {
+                    ship.Score += 10;
+                }
             }
 
             if (this.Health <= 0)
             {
+
                 Game1.TheGame.actualizaciones.Add(this);
+                Game1.TheGame.actualizaciones.Add(new Explosion(Rectangle));
             }
         }
     }

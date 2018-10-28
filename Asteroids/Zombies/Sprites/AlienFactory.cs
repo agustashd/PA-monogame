@@ -9,10 +9,13 @@ namespace Asteroids.Sprites
 {
     public class AlienFactory : FabricBase
     {
+        TimeSpan frameTime;
+
         public override void Update(GameTime gametime)
         {
-            if (Game1.TheGame.sprites.Count() < 9)
+            if (gametime.TotalGameTime.Subtract(frameTime).Milliseconds > 600)
             {
+                frameTime = gametime.TotalGameTime;
                 Game1.TheGame.actualizaciones.Add(new Alien());
             }
         }

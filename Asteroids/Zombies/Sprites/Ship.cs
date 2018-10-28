@@ -18,11 +18,20 @@ namespace Asteroids.Sprites
             Rectangle = new Rectangle(125, 460, 40, 40);
             Health = 100;
             Image = Game1.TheGame.Content.Load<Texture2D>("Images/ship");
-            var w = Image.Width / 4;
+            var img = Image.Width / 4;
             for (int i = 0; i < 4; i++)
             {
-                rectangulos.Add(new Rectangle(w * i, 0, w, Image.Height));
+                rectangulos.Add(new Rectangle(img * i, 0, img, Image.Height));
             }
+        }
+
+        public override void Draw(GameTime gametime)
+        {
+            Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Font.HUD],
+                                                 "HP                 SCORE " + Score.ToString(),
+                                                 new Vector2(2, 0),
+                                                 Color.Thistle);
+            base.Draw(gametime);
         }
 
         TimeSpan lastTime, frameTime;
@@ -35,7 +44,8 @@ namespace Asteroids.Sprites
             {
                 frameTime = gametime.TotalGameTime;
                 selectedRectangle++;
-                if (selectedRectangle > 3) selectedRectangle = 0;
+                if (selectedRectangle > 3)
+                    selectedRectangle = 0;
             }
 
             int x, y;
@@ -58,6 +68,11 @@ namespace Asteroids.Sprites
                 lastTime = gametime.TotalGameTime;
                 Laser laser = new Laser(this);
                 Game1.TheGame.actualizaciones.Add(laser);
+            }
+
+            if (Health <= 0)
+            {
+                //Game1.TheGame.actualizaciones.Add(new Explosion(Rectangle));
             }
         }
     }

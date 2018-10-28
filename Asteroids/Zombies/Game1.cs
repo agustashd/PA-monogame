@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Asteroids.Sprites;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroids
 {
@@ -11,16 +13,25 @@ namespace Asteroids
     /// </summary>
     public class Game1 : Game
     {
-        #region Variables
+        public enum Soundfx
+        {
+            Explosion, Laser
+        }
 
-        // Singleton - Instancia unica de un objeto
+        public enum Font
+        {
+            HUD 
+        }
+
+        Song backgroundSong;
+
         internal static Game1 TheGame { get; private set; }
         internal GraphicsDeviceManager graphics { get; private set; }
         internal SpriteBatch spriteBatch { get; private set; }
         internal List<Updateable> sprites { get; private set; }
         internal List<Sprite> actualizaciones { get; private set; }
-
-        #endregion
+        public Dictionary<Soundfx, SoundEffect> Sounds { get; private set; }
+        public Dictionary<Font, SpriteFont> Fonts { get; private set; }
 
         public Game1()
         {
@@ -53,14 +64,24 @@ namespace Asteroids
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Fonts = new Dictionary<Font, SpriteFont>();
+            Sounds = new Dictionary<Soundfx, SoundEffect>();
 
             // TODO: use this.Content to load your game content here
 
             actualizaciones = new List<Sprite>();
             sprites = new List<Updateable>();
+
+            backgroundSong = Content.Load<Song>("Sounds/ObservingTheStar");
+
+            Sounds.Add(Soundfx.Explosion, Content.Load<SoundEffect>("Sounds/explosion"));
+            Sounds.Add(Soundfx.Laser, Content.Load<SoundEffect>("Sounds/laser9"));
+
+            Fonts.Add(Font.HUD, Content.Load<SpriteFont>("Fonts/HUD"));
+
+            sprites.Add(new AlienFactory());
             sprites.Add(new Background());
             sprites.Add(new Ship());
-            sprites.Add(new AlienFactory());
         }
 
         /// <summary>
@@ -72,6 +93,7 @@ namespace Asteroids
             // TODO: Unload any non ContentManager content here
         }
 
+        bool firstRun = true;
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.
@@ -79,12 +101,18 @@ namespace Asteroids
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            if (firstRun)
+            {
+                MediaPlayer.Play(backgroundSong);
+                firstRun = false;
+            }
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
             //xena.Update(gameTime);
-            //zombie.Update(gameTime);
+            //asteroids.Update(gameTime);
 
             foreach (var sprite in sprites)
             {
@@ -118,7 +146,7 @@ namespace Asteroids
 
             // TODO: Add your drawing code here
 
-            //zombie.Draw(gameTime);
+            //asteroids.Draw(gameTime);
             //xena.Draw(gameTime);
 
             spriteBatch.Begin();

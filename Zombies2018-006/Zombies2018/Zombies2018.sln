@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zombies2018", "Zombies2018\Zombies2018.csproj", "{C76FF802-8A48-4AF5-A0EE-3EF0D408B708}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C76FF802-8A48-4AF5-A0EE-3EF0D408B708}.Debug|x86.ActiveCfg = Debug|x86
+		{C76FF802-8A48-4AF5-A0EE-3EF0D408B708}.Debug|x86.Build.0 = Debug|x86
+		{C76FF802-8A48-4AF5-A0EE-3EF0D408B708}.Release|x86.ActiveCfg = Release|x86
+		{C76FF802-8A48-4AF5-A0EE-3EF0D408B708}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26A57807-7FEE-4BA0-96D1-71B0C7A63A95}
+	EndGlobalSection
+EndGlobal
