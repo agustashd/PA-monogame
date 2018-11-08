@@ -8,6 +8,13 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroids
 {
+    // PARA AGREGAR
+    // TABLA DE SCORE AL FINAL DEL JUEGO EN ARCHIVO
+    // BOSS
+    // MAS ENEMIGOS
+    // NIVELES
+    // CAMPO DE FUERZA
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
