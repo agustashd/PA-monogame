@@ -74,10 +74,12 @@
     <Content Include="Content\Sounds\explosion.wav" />
     <Content Include="Content\Sounds\laser9.wav" />
     <Content Include="Icon.ico" />
+    <Content Include="Scores.txt" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\Fonts\Score.spritefont" />
     <None Include="Content\Fonts\GameOver.spritefont" />
     <None Include="Content\Fonts\HUD.spritefont" />
     <None Include="Content\Fonts\Restart.spritefont" />

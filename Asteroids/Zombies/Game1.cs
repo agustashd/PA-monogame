@@ -12,8 +12,6 @@ namespace Asteroids
     // TABLA DE SCORE AL FINAL DEL JUEGO EN ARCHIVO
     // BOSS
     // MAS ENEMIGOS
-    // NIVELES
-    // CAMPO DE FUERZA
 
     /// <summary>
     /// This is the main type for your game.
@@ -27,7 +25,7 @@ namespace Asteroids
 
         public enum Font
         {
-            HUD, GameOver, Restart
+            HUD, GameOver, Restart, Score
         }
 
         Song backgroundSong;
@@ -88,6 +86,7 @@ namespace Asteroids
             Fonts.Add(Font.HUD, Content.Load<SpriteFont>("Fonts/HUD"));
             Fonts.Add(Font.GameOver, Content.Load<SpriteFont>("Fonts/GameOver"));
             Fonts.Add(Font.Restart, Content.Load<SpriteFont>("Fonts/Restart"));
+            Fonts.Add(Font.Score, Content.Load<SpriteFont>("Fonts/Score"));
 
             sprites.Add(new AlienFactory());
             sprites.Add(new Background());
@@ -148,6 +147,13 @@ namespace Asteroids
             }
             else if (IsGameOver)
             {
+                // Remueve todos los aliens cuando se termina el juego
+                var listOfSprites = sprites.FindAll(x => x is Alien);
+                foreach (var sprite in listOfSprites)
+                {
+                    sprites.Remove(sprite);
+                }
+
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
                     IsGameOver = false;
