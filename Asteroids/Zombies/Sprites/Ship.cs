@@ -43,7 +43,7 @@ namespace Asteroids.Sprites
                 if (!Game1.TheGame.IsGameOver)
                 {
                     FileStream fs = null;
-                    fs = new FileStream("Score.txt", FileMode.Append);
+                    fs = new FileStream("Scores.txt", FileMode.Append);
                     using (StreamWriter writer = new StreamWriter(fs))
                     {
                         writer.WriteLine(Score);
@@ -60,7 +60,7 @@ namespace Asteroids.Sprites
                     var text = i.ToString() + ".  " + topScores[i - 1];
                     position += 50;
                     Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Font.Score],
-                                                     text, new Vector2(50, position), Color.Red);
+                                                     text, new Vector2(70, position), Color.Red);
                 }
                 //position = 125;
                 Game1.TheGame.IsGameOver = true;
