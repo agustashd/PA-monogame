@@ -71,6 +71,7 @@
     <Content Include="Content\Images\laser.png" />
     <Content Include="Content\Images\ship.png" />
     <Content Include="Content\Images\ship_explosion.png" />
+    <Content Include="Content\Images\ufo.png" />
     <Content Include="Content\Sounds\explosion.wav" />
     <Content Include="Content\Sounds\laser9.wav" />
     <Content Include="Icon.ico" />
