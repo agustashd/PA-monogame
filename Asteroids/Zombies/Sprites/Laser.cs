@@ -57,6 +57,17 @@ namespace Asteroids.Sprites
                         break;
                     }
                 }
+                Boss boss = sprite as Boss;
+                if (boss != null)
+                {
+                    if (boss.Rectangle.Intersects(Rectangle))
+                    {
+                        boss.Health -= energy / 2;
+                        ship.Score += 1;
+                        Game1.TheGame.actualizaciones.Add(this);
+                        break;
+                    }
+                }
 
             }
         }

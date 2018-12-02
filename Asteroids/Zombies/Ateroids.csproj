@@ -47,7 +47,9 @@
     <Compile Include="Sprites\Alive.cs" />
     <Compile Include="Sprites\Background.cs" />
     <Compile Include="Sprites\BackgroundBase.cs" />
+    <Compile Include="Sprites\Boss.cs" />
     <Compile Include="Sprites\Explosion.cs" />
+    <Compile Include="Sprites\Mine.cs" />
     <Compile Include="Sprites\Laser.cs" />
     <Compile Include="Sprites\FabricBase.cs" />
     <Compile Include="Sprites\Mortable.cs" />
@@ -67,11 +69,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Images\alien.png" />
+    <Content Include="Content\Images\asteroid.png" />
     <Content Include="Content\Images\background.png" />
     <Content Include="Content\Images\laser.png" />
+    <Content Include="Content\Images\mine.png" />
     <Content Include="Content\Images\ship.png" />
     <Content Include="Content\Images\ship_explosion.png" />
     <Content Include="Content\Images\ufo.png" />
+    <Content Include="Content\Sounds\boss_shot.wav" />
     <Content Include="Content\Sounds\explosion.wav" />
     <Content Include="Content\Sounds\laser9.wav" />
     <Content Include="Icon.ico" />
@@ -80,7 +85,9 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="Content\Fonts\Score.spritefont" />
+    <None Include="Content\Fonts\Score.spritefont">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Content\Fonts\GameOver.spritefont" />
     <None Include="Content\Fonts\HUD.spritefont" />
     <None Include="Content\Fonts\Restart.spritefont" />

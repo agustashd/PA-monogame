@@ -13,9 +13,18 @@ namespace Asteroids.Sprites
     {
         public Alien()
         {
-            Rectangle = new Rectangle(random.Next(Game1.TheGame.GraphicsDevice.Viewport.Width - 50), 10, 50, 50);
-            Health = random.Next(30, 100);
-            Image = Health > 80 ? Game1.TheGame.Content.Load<Texture2D>("Images/ufo") : Game1.TheGame.Content.Load<Texture2D>("Images/alien");
+            Health = random.Next(20, 100);
+            if (Health > 70)
+            {
+                Rectangle = new Rectangle(random.Next(Game1.TheGame.GraphicsDevice.Viewport.Width - 50), 10, 50, 50);
+                Image = Game1.TheGame.Content.Load<Texture2D>("Images/alien");
+            }
+            else
+            {
+                Health -= 10;
+                Rectangle = new Rectangle(random.Next(Game1.TheGame.GraphicsDevice.Viewport.Width - 50), 10, 35, 35);
+                Image = Game1.TheGame.Content.Load<Texture2D>("Images/asteroid");
+            }
         }
 
         // Para completar el codigo que le falta al metodo Update de la clase abstracta Sprite

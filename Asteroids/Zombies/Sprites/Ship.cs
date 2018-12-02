@@ -32,7 +32,7 @@ namespace Asteroids.Sprites
                                                  "HP                 SCORE " + Score.ToString(),
                                                  new Vector2(2, 0),
                                                  Color.Thistle);
-            if (Health <= 0)
+            if (Health <= 0 || Game1.TheGame.IsBossDead)
             {
                 Game1.TheGame.spriteBatch.DrawString(Game1.TheGame.Fonts[Game1.Font.GameOver],
                                                      "GAME OVER", new Vector2(20, 50), Color.AntiqueWhite);
@@ -102,6 +102,13 @@ namespace Asteroids.Sprites
                 lastTime = gametime.TotalGameTime;
                 Laser laser = new Laser(this);
                 Game1.TheGame.actualizaciones.Add(laser);
+            }
+
+            if (Score > 50 && !Game1.TheGame.BossTime)
+            {
+                Boss boss = new Boss();
+                Game1.TheGame.actualizaciones.Add(boss);
+                Game1.TheGame.BossTime = true;
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Asteroids.Sprites
 
         public override void Update(GameTime gametime)
         {
-            if (gametime.TotalGameTime.Subtract(frameTime).Milliseconds > 600)
+            if (gametime.TotalGameTime.Subtract(frameTime).Milliseconds > 600 && !Game1.TheGame.BossTime)
             {
                 frameTime = gametime.TotalGameTime;
                 Game1.TheGame.actualizaciones.Add(new Alien());

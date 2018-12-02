@@ -8,11 +8,6 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Asteroids
 {
-    // PARA AGREGAR
-    // TABLA DE SCORE AL FINAL DEL JUEGO EN ARCHIVO
-    // BOSS
-    // MAS ENEMIGOS
-
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -20,7 +15,7 @@ namespace Asteroids
     {
         public enum Soundfx
         {
-            Explosion, Laser
+            Explosion, Laser, Mine
         }
 
         public enum Font
@@ -37,6 +32,8 @@ namespace Asteroids
         internal List<Sprite> actualizaciones { get; private set; }
         public Dictionary<Soundfx, SoundEffect> Sounds { get; private set; }
         public Dictionary<Font, SpriteFont> Fonts { get; private set; }
+        public bool BossTime { get; internal set; } = false;
+        public bool IsBossDead { get; internal set; } = false;
         public bool IsGameOver { get; internal set; } = false;
 
         public Game1()
@@ -82,6 +79,7 @@ namespace Asteroids
 
             Sounds.Add(Soundfx.Explosion, Content.Load<SoundEffect>("Sounds/explosion"));
             Sounds.Add(Soundfx.Laser, Content.Load<SoundEffect>("Sounds/laser9"));
+            Sounds.Add(Soundfx.Mine, Content.Load<SoundEffect>("Sounds/boss_shot"));
 
             Fonts.Add(Font.HUD, Content.Load<SpriteFont>("Fonts/HUD"));
             Fonts.Add(Font.GameOver, Content.Load<SpriteFont>("Fonts/GameOver"));
@@ -148,7 +146,7 @@ namespace Asteroids
             else if (IsGameOver)
             {
                 // Remueve todos los aliens cuando se termina el juego
-                var listOfSprites = sprites.FindAll(x => x is Alien);
+                var listOfSprites = sprites.FindAll(x => x is Alien || x is Laser || x is Mine || x is Boss);
                 foreach (var sprite in listOfSprites)
                 {
                     sprites.Remove(sprite);
@@ -156,6 +154,8 @@ namespace Asteroids
 
                 if (Keyboard.GetState().IsKeyDown(Keys.Enter))
                 {
+                    BossTime = false;
+                    IsBossDead = false;
                     IsGameOver = false;
                     LoadContent();
                 }
