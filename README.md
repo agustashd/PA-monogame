@@ -1,3 +1,3 @@
 # PA-monogame
 
-My first games using Monogame
+My first game using Monogame
